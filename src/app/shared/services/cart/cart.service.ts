@@ -19,12 +19,26 @@ export class CartService {
       this.cartProducts = [];
     }
   }
-
   addProduct(p: ICategory) {
     this.cartProducts.push(p);
     this.cartProductsNumber++;
-    localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
-    localStorage.setItem('cartProductsNumber', this.cartProductsNumber);
+    this.updateCartProducts();
+  }
+  removeProduct(id) {
+    let P_Num = 0;
+    this.cartProducts.forEach( (p , index ) => {
+      if (p.id === id) {
+        P_Num = p.itemNum;
+        this.cartProducts.splice(index, 1 );
+      }
+    });
+    this.cartProductsNumber -= P_Num;
+    for (const k in localStorage) {
+      if (k.includes(id) ) {
+        localStorage.removeItem(k);
+      }
+    }
+    this.updateCartProducts();
   }
   updateCartProducts() {
     localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
@@ -41,8 +55,7 @@ export class CartService {
         localStorage.removeItem(k);
       }
     }
-    localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
-    localStorage.setItem('cartProductsNumber', this.cartProductsNumber);
+    this.updateCartProducts();
     // localStorage.clear();
   }
 }

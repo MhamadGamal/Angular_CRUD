@@ -1,28 +1,68 @@
-<!-- <div class="d-flex justify-content-end mb-2">
-    <button *ngIf="cartProducts" class="btn btn-dark"> Checkout </button>
-</div> -->
-<table class="table table-striped">
-    <thead class="bg-dark text-light">
-        <tr>
-            <th>#</th>
-            <th>P_name</th>
-            <th>desc</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <!-- <th></th> -->
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let p of cartProducts; let i = index">
-            <td> {{i+1}} </td>
-            <td> {{p.name}} </td>
-            <td> {{p.desc}} </td>
-            <td> {{p.itemNum}} </td>
-            <td> {{p.price | currency}} </td>
-            <!-- <td>
-                <button class="btn btn-sm mx-2 btn-warning">edit</button>
-                <button class="btn btn-sm btn-danger">delete</button>
-            </td> -->
-        </tr>
-    </tbody>
-</table>
+<div *ngIf="finish" class="alert alert-success text-center" role="alert">
+    <h3> Congratulations </h3>
+    <p> the process done successfuly </p>
+</div>
+<div *ngIf="cartProducts.length; else noData">
+    <div class="d-flex justify-content-end mb-2">
+        <button *ngIf="cartProducts" (click)="checkout(checkoutModal)" class="btn btn-dark"> Checkout </button>
+    </div>
+    <table  class="table table-striped">
+        <thead class="bg-dark text-light">
+            <tr>
+                <th>#</th>
+                <th>P_name</th>
+                <th>desc</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th *ngIf="auth.loginnedUser.type == 'admin'"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of cartProducts; let i = index">
+                <td> {{i+1}} </td>
+                <td> {{p.name}} </td>
+                <td> {{p.desc}} </td>
+                <td> {{p.itemNum}} </td>
+                <td> {{p.price | currency}} </td>
+                <td *ngIf="auth.loginnedUser.type == 'admin'">
+                    <button class="btn btn-sm mx-2 btn-warning">edit</button>
+                    <button class="btn btn-sm btn-danger">delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<ng-template #noData>
+    <div class="text-center">
+        <p> No such products in cart </p>
+    <a routerLink='/home' class="btn btn-dark"> Buy Products </a>
+    </div>
+</ng-template>
+
+
+
+<ng-template #checkoutModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Checkout</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <table  class="w-100">
+          <tr *ngFor="let item of checkoutList">
+               <td> {{ item.name }} </td>  
+                <td> {{ item.price }}  </td>
+                <td> <input (change)='checkoutProductNumber(ProductNumber.value, item.id)' #ProductNumber  style="width: 50px;" class="p-1" type="number" [value]="item.itemNum">  </td>
+                <td> <button class="btn btn-danger" (click)="deleteCartItem(item.id)" > Delete  </button> </td>
+          </tr>
+      </table>
+      <hr>
+      <div class="py-2">
+          <b>Total:</b> {{totalPrice | currency}}
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" (click)="finishCheckout()"  class="btn btn-dark" >Checkout</button>
+    </div>
+  </ng-template>
