@@ -19,6 +19,7 @@ export class CartService {
       this.cartProducts = [];
     }
   }
+
   addProduct(p: ICategory) {
     this.cartProducts.push(p);
     this.cartProductsNumber++;
