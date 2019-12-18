@@ -1,0 +1,23 @@
+<div class="item my-2 bg-dark">
+        <div class="img-holder">
+           
+            <img src="assets/img/cat/{{item.img}}" [routerLink]="['/products/product-details', item.id]" [alt]="item.name" class="img-fluid">
+        </div>
+        <div class="info p-2">
+            <h5 class="text-light text-center"> {{item.name}} </h5>
+            <p class="d-flex justify-content-between"> 
+                <span>
+                        {{ item.desc }}
+                </span> 
+                <span class="price text-light">
+                    {{item.price | currency}}
+                </span>
+            </p>
+            <div class="d-flex" *ngIf="addToCart">
+                <button class="btn btn-sm" (click)="decItems(item.id)"> - </button>
+                <input type="text" readonly class="col" value="itemNum" [(ngModel)]="itemNum">
+                <button class="btn btn-sm" (click)="incItems(item.id)"> + </button>
+            </div>
+            <button *ngIf="!addToCart" class="btn btn-sm btn-block" (click)="addToCartM()"> Add To Cart </button>
+        </div>
+    </div>

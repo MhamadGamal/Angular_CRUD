@@ -1,0 +1,39 @@
+.auth-layout{
+    min-height: 100vh;
+    background-image: url('../../../assets/img/login.jpg');
+    background-size: cover;
+    .overlay{
+        background-color: rgba(0,0,0,.5);
+        min-height: 100vh;
+        height: 100%;
+        .container, .row{
+            min-height: 100vh;
+            height: 100%;
+
+        }
+        .wraaper{
+            margin-top: 20vh;
+            padding: 60px 20px 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 20px 20px 30px rgba(0,0,0,.2), -20px -20px 30px rgba(0,0,0,.2);
+            position: relative;
+            &::before{
+                content: "CRUD app";
+                position: absolute;
+                width: 90%;
+                color: #fff;
+                font-weight: bold;
+                text-align: center;
+                padding: 20px 0;
+                font-size: 2rem;
+                background-color: #d87b71;
+                left: 5%;
+            }
+            &::before{
+                top: -50px;
+            }
+            
+        }
+    }
+}

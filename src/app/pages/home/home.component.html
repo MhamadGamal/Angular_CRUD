@@ -1,0 +1,22 @@
+<ul class="nav justify-content-center bg-dark">
+    <li class="nav-item">
+        <a class="nav-link" (click)="filter('all')" [ngClass]="{'active': filtered == 'all'}" >all</a>
+    </li>
+    <li class="nav-item" *ngFor="let c of categoriesNames">
+        <a class="nav-link" (click)="filter(c)" [ngClass]="{'active': filtered == c}"> {{c}} </a>
+    </li>
+    
+</ul>
+
+<div id="categories" class=" my-3">
+    <div class="row">
+        <div class="col-md-3 col-sm-6" *ngFor="let item of filteredCat">
+            <div single-product [item]='item'></div>
+        </div>
+    </div>
+    <!-- <div class="d-flex justify-content-center mt-4" *ngIf="loadMore">
+        <button class="btn btn-dark  p-3" (click)="loadMoreP()" >
+            More
+        </button>
+    </div> -->
+</div>

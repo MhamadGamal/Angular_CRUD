@@ -1,0 +1,65 @@
+.navbar{
+    padding: 0 !important;
+    a{
+        color: #fff !important;
+        cursor: pointer;
+        &.nav-link{
+            padding: 15px !important;
+            position: relative;
+            .cart{
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                background-color: steelblue;
+                text-align: center;
+                color: #fff;
+                border-radius: 50%;
+                bottom: 5px;
+                right: 3px;
+                font-size: 12px;
+                line-height: 24px;
+            }
+        }
+        .user{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 5px 5px 0 5px;
+        }
+        .user+span{
+            position: relative;
+            top: 4px;
+            font-size: 13px;
+            color: #ececec;
+        }
+        &.active{
+            background-color: rgb(196, 92, 80) !important;
+            color: #fff !important;
+        }
+    }
+    .navbar-toggler{
+        margin: 20px 0;
+        span{
+            height: 2px;
+            background-color: #fff;
+            display: block;
+            width: 25px;
+            margin: 5px 0
+        }
+    }
+}
+.dropdown-menu{
+    background-color: #c45c50;
+    a:hover{
+        background-color: #333 ;
+    }
+}
+.dropdown-toggle::after {
+    vertical-align: -0.145em !important;
+}
+@media(max-width: 991px){
+    .nav-item:last-child{
+        margin-bottom: 30px;
+    }
+}

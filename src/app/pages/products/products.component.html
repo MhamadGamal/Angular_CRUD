@@ -1,0 +1,72 @@
+<div class="row no-gutters justify-content-between ">
+    <div class="col-md-3 col-6">
+        <input type="text" (keyup)='filter(filterValue)' [(ngModel)]="filterValue" placeholder="search" class="form-control">
+    </div>
+    <div *ngIf="auth.loginnedUser.type == 'admin'" class="col-2 text-right">
+        <button class="btn btn-success mb-1" (click)='addNewProduct(AddModalContent)'>add new</button>
+    </div>
+</div>
+<table class="table table-striped">
+    <thead class="bg-dark text-light">
+        <tr>
+            <th>#</th>
+            <th>P_name</th>
+            <th>desc</th>
+            <th>Price</th>
+            <th *ngIf="auth.loginnedUser.type == 'admin'"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of Products | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i = index">
+            <td> {{i+1}} </td>
+            <td> {{p.name}} </td>
+            <td> {{p.desc}} </td>
+            <td> {{p.price | currency}} </td>
+            <td *ngIf="auth.loginnedUser.type == 'admin'">
+                <button class="btn btn-sm mx-2 btn-warning" (click)='editProduct(p, editModalContent)' >edit</button>
+                <button class="btn btn-sm btn-danger" (click)="delProduct(p.id)">delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="Products.length"></ngb-pagination>
+
+<!-- Add Product  Modal -->
+<ng-template #AddModalContent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Product</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="addProductForm">
+        <div class="form-group">
+          <label> Category </label>
+          <select formControlName="name"  class="form-control">
+              <option value="">select....</option>
+              <option *ngFor="let c of catTypes" [value]="c">{{c}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+            <input type="text" placeholder="Product Description" class="form-control" formControlName="desc">
+        </div>
+        <div class="form-group">
+            <input type="number" placeholder="Price" formControlName="price" class="form-control">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" [disabled]='!addProductForm.valid' class="btn btn-dark" (click)="addProduct(addProductForm.value)">Save</button>
+    </div>
+  </ng-template>
+<!-- Add Product  Modal -->
+<ng-template #editModalContent let-modal>
+   <app-edit-product [data]='targetEditing' ></app-edit-product>
+</ng-template>
+  
+

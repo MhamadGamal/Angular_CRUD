@@ -1,0 +1,14 @@
+.details{
+    .img-holder{
+        height: 250px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        img{
+            display: block;
+            width: 100%;
+        }
+    }
+    p{
+        margin: 10px 0;
+    }
+}

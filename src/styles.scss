@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+body{
+    font-family: 'Overpass', sans-serif !important;
+    background-color: #eee;
+}
+h1,h2,h3,h4{
+    font-family: 'Anton', sans-serif !important;
+
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #c45c50;
+    border-color: #95352a;
+}
+.page-link, .page-link:hover{
+    color: #c45c50;
+    padding: 0.4rem 0.75rem;
+    &:focus{
+        box-shadow: none;
+    }
+}
+input:focus, .btn:focus{
+    box-shadow: none !important;
+    outline: none !important;
+}

@@ -1,0 +1,28 @@
+<!-- <div class="d-flex justify-content-end mb-2">
+    <button *ngIf="cartProducts" class="btn btn-dark"> Checkout </button>
+</div> -->
+<table class="table table-striped">
+    <thead class="bg-dark text-light">
+        <tr>
+            <th>#</th>
+            <th>P_name</th>
+            <th>desc</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <!-- <th></th> -->
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of cartProducts; let i = index">
+            <td> {{i+1}} </td>
+            <td> {{p.name}} </td>
+            <td> {{p.desc}} </td>
+            <td> {{p.itemNum}} </td>
+            <td> {{p.price | currency}} </td>
+            <!-- <td>
+                <button class="btn btn-sm mx-2 btn-warning">edit</button>
+                <button class="btn btn-sm btn-danger">delete</button>
+            </td> -->
+        </tr>
+    </tbody>
+</table>
